@@ -69,7 +69,7 @@ public function store(Request $request)
         $request->validate([
             'name' => 'required|string|max:255',
             'parent_id' => 'nullable|exists:folders,id',
-            'user_id' => 'nullable|exists:users,id', // Validate the user_id
+            'user_id' => 'nullable |exists:users,id', // Validate the user_id
         ]);
 
         // Log user information

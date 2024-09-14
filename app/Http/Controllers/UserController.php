@@ -1,22 +1,49 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Folder;
+
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::query()->get();
         return response()->json([
             'results' => $users
         ], 200);
 
+    }
+    public function store(Request $request): JsonResponse
+    {
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'role' => ['required', 'string', 'max:255'],
+                'telephone' => ['integer'],
+                'password' => ['required','unique:users'],
+            ]);
+
+            $user = User::query()->create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'role' => $request->role,
+                'telephone' => $request->telephone,
+                'password' => Hash::make($request->password),
+            ]);
+
+            event(new Registered($user));
+
+            return response()->json([
+                'message' => 'User successfully created!'
+            ], 200);
     }
 
 
@@ -32,88 +59,56 @@ class UserController extends Controller
             'users' => $users
         ], 200);
     }
+    public function register(UserStoreRequest $request)
+    {
+
+    }
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required|min:8',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 422);
         }
-
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $user = Auth::user();
-            $token = $user->createToken('AuthToken')->plainTextToken;
-            return response()->json(['token' => $token], 200);
-        }
+       if (auth()->attempt($request->only('email', 'password'))) {
+          $user = auth()->user();
+           $token = $user->createToken('AuthToken')->plainTextToken;
+           return response()->json(['token' => $token], 200);
+       }
 
         return response()->json(['error' => 'Unauthorized'], 401);
     }
     public function update(UserUpdateRequest $request, $id)
     {
-        // Find the user by ID
-        $user = User::find($id);
-        
-        // Check if the user exists
+        $attributes = $request->validate([
+            'name' => 'required|max:25',
+            'email' => 'required|email',
+            'role' => 'required',
+            'telephone' => 'nullable',
+        ]);
+        $user = User::query()->find($id);
         if (!$user) {
-            return response()->json(['message' => 'User not found.'], 404);
+            return response()->json([
+                'message' => 'User not found.'
+            ], 404);
         }
-    
-        try {
-            // Update the user attributes with the request data
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->role = $request->role;
-            $user->telephone = $request->telephone;
-            
-            // Save the updated user
-            $user->save();
-            
-            return response()->json(['message' => 'User updated successfully.'], 200);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Something went wrong while updating user.'], 500);
-        }
+        $user->update($attributes);
+        return response()->json([
+            'message' => 'User updated successfully.'
+        ], 200);
+
     }
 
     public function destroy($id)
     {
-        $user = User::find($id);
-        if (!$user) {
-            return response()->json(['message' => 'User not found.'], 404);
-        }
+        $user = User::query()->findOrFail($id);
+        $user->delete();
 
-        try {
-            $user->delete();
-            return response()->json(['message' => 'User deleted successfully.'], 200);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Something went wrong while deleting user.'], 500);
-        }
+        return response()->json([
+            'message' => 'User deleted successfully.'
+        ], 200);
     }
-    public function storeChildFolder(Request $request)
-    {
-        try {
-            // Validation
-            $request->validate([
-                'parent_id' => 'required|exists:folders,id',
-                'name' => 'required|string|max:255',
-            ]);
-    
-            // Find the parent folder
-            $parentFolder = Folder::findOrFail($request->parent_id);
-    
-            // Create the child folder
-            $childFolder = new Folder();
-            $childFolder->name = $request->name;
-            $childFolder->parent_id = $parentFolder->id;
-            $childFolder->save();
-    
-            return response()->json($childFolder, 201);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Failed to create child folder: ' . $e->getMessage()], 500);
-        }
-    }
-
-
 }

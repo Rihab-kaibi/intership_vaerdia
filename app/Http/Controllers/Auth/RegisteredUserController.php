@@ -17,34 +17,5 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): JsonResponse
-    {
-        try {
-            $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'role' => ['required', 'string', 'max:255'],
-                'telephone' => ['integer'],
-                'password' => ['required', Rules\Password::defaults()],
-            ]);
 
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'role' => $request->role,
-                'telephone' => $request->telephone,
-                'password' => Hash::make($request->password),
-            ]);
-
-            event(new Registered($user));
-
-            return response()->json([
-                'message' => 'User successfully created!'
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Something went wrong!'
-            ], 500);
-        }
-    }
 }

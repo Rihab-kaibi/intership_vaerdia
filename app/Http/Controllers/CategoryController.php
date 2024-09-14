@@ -1,7 +1,4 @@
 <?php
-
-
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -14,6 +11,9 @@ class CategoryController extends Controller
     public function addCategory(Request $request)
     {
         $request->validate([
+            /*Validation des données : La méthode valide les données reçues de la requête.
+            Le champ name est requis et doit être une chaîne de caractères avec une longueur maximale de 255 caractères.
+            Le champ Folder_id est optionnel, mais doit exister dans la table categories. */
             'name' => 'required|string|max:255',
             'Folder_id' => 'nullable|exists:categories,id'
         ]);

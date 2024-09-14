@@ -37,6 +37,8 @@ class PdfFileController extends Controller
                 mkdir($outputFolder, 0777, true);
             }
     
+            Log::info('Sending to Flask API:', ['pdf_id' => $pdfFile->id, 'output_folder' => $outputFolder]);
+    
             $client = new Client();
             $response = $client->post('http://localhost:5000/convert', [
                 'json' => [
@@ -46,6 +48,7 @@ class PdfFileController extends Controller
             ]);
     
             $conversionOutput = json_decode($response->getBody()->getContents(), true);
+            Log::info('Conversion Output:', $conversionOutput); // Log the conversion output
     
             $uploadedFiles[] = [
                 'pdfFile' => $pdfFile,
@@ -56,6 +59,20 @@ class PdfFileController extends Controller
     
         return response()->json(['message' => 'PDF files stored and converted successfully', 'files' => $uploadedFiles]);
     }
+     // Method to get PDFs with their associated images
+     public function getPdfsWithImages()
+    {
+        $pdfFiles = PdfFile::with('images')->get();
+
+        // Build the response and set CORS headers
+        return response()->json($pdfFiles)
+            ->header('Access-Control-Allow-Origin', 'http://localhost:3000')  // Adjust the allowed origin as needed
+            ->header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+            ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
+            ->header('Access-Control-Allow-Credentials', 'true');   
+    }
+
+
     public function index()
     {
         $documents = PdfFile::all(); // Fetch all documents from the pdf_files table
@@ -92,7 +109,29 @@ class PdfFileController extends Controller
         return response()->file($filePath);
     }
     
-    
+
+    public function scanAllPdfs()
+{
+    $pdfFiles = PdfFile::with('images')->get();
+    $results = [];
+
+    foreach ($pdfFiles as $pdf) {
+        foreach ($pdf->images as $image) {
+            $ocrText = $this->runOcr($image->path); // Implement runOcr to perform OCR on the image
+            $results[] = [
+                'page_number' => $image->page_number,
+                'text' => $ocrText,
+            ];
+        }
+    }
+
+    return response()->json(['results' => $results]);
+}
+
+private function runOcr($imagePath)
+{
+    // Implement your OCR logic here
+}
     
     
     
