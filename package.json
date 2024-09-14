@@ -47,7 +47,7 @@
     "@react-pdf/renderer": "^3.4.4",
     "@tanstack/react-table": "^8.16.0",
     "antd": "^5.16.1",
-    "axios": "^1.6.8",
+    "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "botframework-webchat": "^4.17.0",
     "botframework-webchat-component": "^4.17.0",
@@ -60,9 +60,9 @@
     "framer-motion": "^11.0.28",
     "gh-pages": "^6.1.1",
     "history": "^5.3.0",
+    "html2canvas": "^1.4.1",
     "leven": "^4.0.0",
     "lucide-react": "^0.379.0",
-    "pdfjs-dist": "^4.2.67",
     "primeicons": "^7.0.0",
     "primereact": "^10.6.5",
     "react": "^18.2.0",
@@ -99,6 +99,6 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.1",
-    "vite": "^5.1.6"
+    "vite": "^5.4.3"
   }
 }

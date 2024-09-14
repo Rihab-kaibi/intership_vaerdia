@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Upload, X } from "react-feather";
+import { useDropzone } from "react-dropzone";
+import { X } from "react-feather";
 import axiosClient from "../../api/axios";
 import DocumentsPage from "./homePageClient/DocumentsPage";
 import FolderManagementPage from "./FolderManagementClient/FolderManagement";
@@ -26,18 +27,13 @@ const FileManagement = () => {
     fetchFolders();
   }, []);
 
-  const handleFileChange = (e) => {
-    const files = Array.from(e.target.files);
-    setSelectedFiles(files);
+  const onDrop = (acceptedFiles) => {
+    setSelectedFiles([...selectedFiles, ...acceptedFiles]);
   };
 
   const handleRemoveFile = (fileToRemove) => {
     const updatedFiles = selectedFiles.filter((file) => file !== fileToRemove);
     setSelectedFiles(updatedFiles);
-  };
-
-  const handleUploadClick = () => {
-    fileInputRef.current.click();
   };
 
   const handleUpload = async () => {
@@ -70,46 +66,32 @@ const FileManagement = () => {
     }
   };
 
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: ".pdf",
+    multiple: true,
+  });
+
   return (
     <div className="container mx-auto p-4">
       <div className="flex justify-center space-x-8">
-        <div className="w-full md:w-1/2 bg-gray-100 rounded-lg p-6 ">
-          <div className="flex items-center justify-center mb-4">
-            <Upload
-              className="w-8 h-8 text-gray-500 cursor-pointer"
-              onClick={handleUploadClick}
-            />
-          </div>
-          <h2 className="text-lg font-semibold text-center mb-4">
-            Choose Files
-          </h2>
-          <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            className="hidden"
-            multiple
-            accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt"
-          />
-          <div className="flex items-center justify-center ">
-            <Button
-              onClick={handleUpload}
-              className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300 "
-            >
-              Upload
-            </Button>
-          </div>
+        <div
+          className="w-full md:w-1/2 bg-gray-100 rounded-lg p-6 flex flex-col items-center justify-center border-dashed border-2 border-gray-300"
+          {...getRootProps()}
+        >
+          <input {...getInputProps()} />
+          <p className="text-center text-gray-500">Drag and drop PDF files here, or click to select files</p>
         </div>
         <div className="w-1/2 bg-gray-100 rounded-lg p-4">
           <h2 className="text-lg font-semibold mb-2">Selected Files</h2>
-          <div className="container mx-auto p-4 rounded-lg ">
+          <div className="flex">
             <FolderManagementPage />
           </div>
-          <div className="grid grid-cols-1 gap-2 overflow-y-auto max-h-40">
+          <div className="grid grid-cols-1 gap-2 overflow-y-auto max-h-40 mt-4">
             {selectedFiles.map((file, index) => (
               <div
                 key={index}
-                className="flex items-center bg-white rounded-md p-2"
+                className="flex items-center bg-white rounded-md p-2 shadow-sm"
               >
                 <span className="truncate">{file.name}</span>
                 <button
@@ -127,7 +109,7 @@ const FileManagement = () => {
             </label>
             <select
               id="folderSelect"
-              className="border border-gray-300 rounded-md p-2 w-full"
+              className="border border-gray-300 rounded-md p-2  shadow-sm"
               value={selectedFolderId}
               onChange={(e) => setSelectedFolderId(e.target.value)}
             >
@@ -138,6 +120,14 @@ const FileManagement = () => {
                 </option>
               ))}
             </select>
+          </div>
+          <div className="flex mt-4">
+            <Button
+              onClick={handleUpload}
+              className=" bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300 shadow-md"
+            >
+              Upload
+            </Button>
           </div>
         </div>
       </div>

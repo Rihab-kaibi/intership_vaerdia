@@ -259,20 +259,6 @@ const TestModal = ({ isOpen, closeModal }) => {
                 <div className="mt-4 flex justify-end space-x-2">
                   <Button
                     type="button"
-                    onClick={addCategorySegmentations}
-                    className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700"
-                  >
-                    Add Category Segmentations
-                  </Button>
-                  <Button
-                    type="button"
-                    onClick={scanOCR}
-                    className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700"
-                  >
-                    Scan OCR
-                  </Button>
-                  <Button
-                    type="button"
                     onClick={() => {
                       addCategorySegmentations();
                       scanOCR();

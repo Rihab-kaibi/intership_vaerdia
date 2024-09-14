@@ -20,7 +20,6 @@ const ClientDashboard = () => {
 
           {/* Client Folders Widget */}
           <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-4">Folders </h2>
             <div className="bg-white p-8 shadow rounded-lg">
               
               <Client_Folders onFileClick={handleFileClick} />

@@ -1,5 +1,4 @@
 import { createBrowserRouter } from 'react-router-dom';
-import App from '../App';
 import Login from "../pages/Login.jsx";
 import AdminLogin from "../components/AdminLogin/AdminLogin.jsx";
 import Signup from "../pages/Signup.jsx";
@@ -17,13 +16,17 @@ import Analytics from "../pages/Admin_pages/Analytics.jsx";
 import Settings from "../pages/Client_document/SettingsPage.jsx";
 import AdminSettings from "../pages/Admin_pages/AdminSettingsPage.jsx";  
 import ProfilePage from "../pages/Client_document/ProfilePage.jsx";
-import ModuleIAManagement from "../pages/Client_document/ModuleIAManagement.jsx";
 import AdminProfilePage from "../pages/Admin_pages/AdminProfilePage.jsx";
 import ClientManagement from "../pages/Admin_pages/ClientManagementFolder/ClientManagement.jsx";
 import DocumentsPage from "../pages/Client_document/homePageClient/DocumentsPage.jsx";
 import Archives from "../pages/Client_document/Archives.jsx";
 import Module_Folders from "../pages/Admin_pages/Module_Folders.jsx";
+import ClientModuleFolders from '../pages/Admin_pages/Client_Module_Folders.jsx';
 import FolderManagementPage from "../pages/Client_document/FolderManagementClient/FolderManagement.jsx";
+import Parsers from '../pages/Client_document/Parsers.jsx';
+import Templates from '../pages/Client_document/Templates.jsx';
+import Subscription from '../pages/Client_document/Subscription.jsx';
+import AccessManagement from '../pages/Admin_pages/AccessManagement.jsx';
 export const CLIENTS_MANAGEMNET_ROUTE = '/Admin/ClientManagement';
 export const LOGIN_ROUTE = '/Client/login';
 export const LOGIN_ADMIN_ROUTE = '/Admin/Login';
@@ -35,10 +38,10 @@ export const NOTIFICATIONS_ROUTE = '/Notifications';
 export const ANALYTICS_ROUTE = '/Analytics';
 export const SETTINGS_ROUTE = '/Settings';
 export const ADMIN_SETTINGS_ROUTE = '/AdminSettings';
-export const HOME_ROUTE = '/Client/dashboard';
+export const HOME_ROUTE = '/Client/folders';
+export const HOME_ROUTE2 = '/Client/home';
 export const HOME_ADMIN_ROUTE = '/Admin/dashboard'
 export const PROFILE_ROUTE = '/ProfilePage';
-export const MANAGEMENT_ROUTE='/ModuleIAManagement';
 export const ADMIN_NOTIFICATIONS_ROUTE='/AdminNotifications';
 export const ADMIN_PROFILE_ROUTE='/AdminProfilePage';
 
@@ -85,6 +88,14 @@ const router = createBrowserRouter([
             element: <ClientDashboard/>
           },
           {
+            path: '/Templates',
+            element: <Templates/>
+          },
+          {
+            path: HOME_ROUTE2,
+            element: <Parsers/>
+          },
+          {
             path: '/FolderManagement',
             element: <FolderManagementPage/>
           },
@@ -105,6 +116,10 @@ const router = createBrowserRouter([
             element: <FileManagement/>
           },
           {
+            path:'/Subscription',
+            element: <Subscription/>
+          },
+          {
             path:BILLING_ROUTE,
             element: <Billing/>
           },
@@ -116,11 +131,22 @@ const router = createBrowserRouter([
             path: SETTINGS_ROUTE,
             element: <Settings/>
           },
+          {
+            path: '/Clients_Module_Folders',
+            element: <ClientModuleFolders/>
+            
+          }, 
+         
         ]
       },
       {
         element: <AdminLayout/>,
         children: [
+          {
+            path: '/AccesManagement',
+            element: <AccessManagement/>
+            
+          }, 
           {
             path: HOME_ADMIN_ROUTE,
             element: <AdminDashboard/>
@@ -139,10 +165,7 @@ const router = createBrowserRouter([
             path: CLIENTS_MANAGEMNET_ROUTE,
             element: <ClientManagement/>
           },
-          {
-            path:MANAGEMENT_ROUTE,
-            element: <ModuleIAManagement/>
-          },
+          
        
           {
             path: ADMIN_NOTIFICATIONS_ROUTE,

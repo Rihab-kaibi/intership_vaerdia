@@ -10,7 +10,11 @@ import { MessageCircle } from 'lucide-react';
 import { Home } from 'lucide-react';
 import { Euro  } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
-import { HOME_ROUTE } from "../router/index.jsx";
+import { HOME_ROUTE,HOME_ROUTE2 } from "../router/index.jsx";
+import { VscFiles } from "react-icons/vsc";
+import { GrScan } from "react-icons/gr";
+import { HiOutlineTemplate } from "react-icons/hi";
+import { FaRegCreditCard } from "react-icons/fa6";
 
 export function SideBar({ className }) {
   const navigate = useNavigate();
@@ -23,10 +27,21 @@ export function SideBar({ className }) {
             Menu 
           </h2>
           <div className="space-y-1">
-            <Button variant="ghost" className="w-full justify-start" onClick={() => navigate(HOME_ROUTE)}>
+          <Button variant="ghost" className="w-full justify-start" onClick={() => navigate(HOME_ROUTE2)}>
               <Home className="mr-2 h-4 w-4" /> Home
             </Button>
-          
+            <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/Templates')}>
+              <HiOutlineTemplate  className="mr-2 h-4 w-4" /> Services
+            </Button>
+            <Button variant="ghost" className="w-full justify-start" onClick={() => navigate(HOME_ROUTE)}>
+              <VscFiles  className="mr-2 h-4 w-4" /> Documents
+            </Button>         
+            <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/Clients_Module_Folders')}>
+              <GrScan  className="mr-2 h-4 w-4" /> Create Parsers
+            </Button>
+            <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/Subscription')}>
+              <FaRegCreditCard  className="mr-2 h-4 w-4" />  Subscription
+            </Button>
             <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/Billing')}>
               <Euro  className="mr-2 h-4 w-4" />  Billing
             </Button>

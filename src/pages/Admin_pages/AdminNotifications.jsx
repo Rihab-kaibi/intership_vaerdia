@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Bell, X } from 'react-feather';
+import KeywordsManagement from './KeywordsManagement';
 
 const AdminNotifications = () => {
-  const [notifications, setNotifications] = useState([
-    { id: 1, message: 'New message from John', date: '2024-03-21T10:30:00' },
-    { id: 2, message: 'Reminder: Meeting at 2 PM', date: '2024-03-20T14:00:00' },
-    { id: 3, message: 'You have 3 new emails', date: '2024-03-19T08:45:00' },
+ const [notifications, setNotifications] = useState([
+    { id: 1, message: 'New document uploaded in CER category', date: '2024-06-15T10:30:00' },
+    { id: 2, message: 'Verification required for DIAGNOSTIA document', date: '2024-06-14T14:00:00' },
+    { id: 3, message: 'System update completed successfully', date: '2024-06-13T08:45:00' },
+    { id: 4, message: 'New client registered for document classification', date: '2024-06-12T09:15:00' },
+    { id: 5, message: 'Invoice generated for Vaerdia Software', date: '2024-06-11T16:30:00' },
   ]);
 
   // Function to remove a notification
@@ -16,6 +19,7 @@ const AdminNotifications = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6 text-gray-800">Notifications</h1>
+      <KeywordsManagement/>
 
       {/* Notifications list */}
       <div className="space-y-4">
@@ -39,7 +43,9 @@ const AdminNotifications = () => {
       {notifications.length === 0 && (
         <p className="text-gray-600 mt-4">No new notifications.</p>
       )}
+      
     </div>
+    
   );
 };
 

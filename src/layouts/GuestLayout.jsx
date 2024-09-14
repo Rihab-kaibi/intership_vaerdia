@@ -4,7 +4,7 @@ import { User, UserCog, UserCheck } from "lucide-react";
 import { LOGIN_ROUTE, SIGNUP_ROUTE, LOGIN_ADMIN_ROUTE, HOME_ROUTE, HOME_ADMIN_ROUTE } from "../router/index.jsx";
 import { useEffect } from "react";
 import Footer from "./Footer.jsx";
-
+import { HomeIcon } from "lucide-react";
 export default function GuestLayout() {
   const navigate = useNavigate();
    
@@ -27,18 +27,23 @@ export default function GuestLayout() {
         <div className="items-center justify-between flex bg-gray-900 bg-opacity-100 px-12 py-4 mb-4 mx-auto shadow-2xl">
           <div className="text-2xl text-white font-semibold inline-flex items-center">
             <Logo /> 
-            <div className=" px-2 " >File-Extractor</div>
+            <div className=" px-2 " >Documents-IA-Scanner</div>
           </div>
           <div>
             <ul className="flex text-white">
+            <li className="ml-5 px-2 py-1">
+                <Link className={"flex"} to={""}>
+                  <HomeIcon className={"mx-1"} />{"Home"}
+                </Link>
+              </li>
               <li className="ml-5 px-2 py-1">
                 <Link className={"flex"} to={LOGIN_ROUTE}>
-                  <User className={"mx-1"} /> Login-client
+                  <User className={"mx-1"} /> {"Login-As-User"}
                 </Link>
               </li>
               <li className="ml-5 px-2 py-1">
                 <Link className={"flex"} to={LOGIN_ADMIN_ROUTE} onClick={() => window.localStorage.setItem('IS_ADMIN_LOGIN', true)}>
-                  <UserCog className={"mx-1"} /> Login-Admin
+                  <UserCog className={"mx-1"} />{"Login-As-Admin"}
                 </Link>
               </li>
               <li className="ml-5 px-2 py-1">
@@ -51,7 +56,7 @@ export default function GuestLayout() {
         </div>
       </header>
       <main className="flex h-screen">
-        <div className="container mx-auto px-4 overflow-y-auto">
+        <div className=" mx-auto px-4 max-w overflow-y-auto">
           <Outlet />
         </div>
       </main>

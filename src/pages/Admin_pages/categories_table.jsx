@@ -91,9 +91,9 @@ const CategoriesTable = () => {
 
   return (
     <div style={{ marginTop: "20px" }}>
-      <h2 style={{ marginBottom: "10px" }}>Categories</h2>
+      <h2 style={{ marginBottom: "10px" }}>Parsers or categorys </h2>
       <Table>
-        <TableCaption>A list of your categories.</TableCaption>
+        <TableCaption>A list of your Parsers.</TableCaption>
         <TableHead>
           <TableCell>ID</TableCell>
         </TableHead>

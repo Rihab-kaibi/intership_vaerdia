@@ -1,6 +1,6 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import Logo from "../components/Logo.jsx";
-import { HomeIcon } from "lucide-react";
+
 import { SideBar } from "./SideBar.jsx";
 import ClientDropDownMenu from "./ClientDropDownMenu.jsx"; // Import your StudentDropDownMenu component
 import Footer from "./Footer.jsx";
@@ -20,11 +20,7 @@ export default function Layout() {
           </div>
           <div>
             <ul className="flex text-white">
-              <li className="mt-2 px-2 py-1">
-                <Link className={"flex"} to={""}>
-                  <HomeIcon className={"mx-1"} />{""}
-                </Link>
-              </li>
+              
               <li className=" px-2 py-1">
                 <ClientDropDownMenu />
               </li>

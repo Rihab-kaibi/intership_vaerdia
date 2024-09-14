@@ -16,21 +16,27 @@ import { Loader } from "lucide-react";
 
 
 import axiosClient from "../../api/axios";
+import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../../context/ClientContext";
+import { HOME_ROUTE2 } from "../../router";
 
 const formSchema = z.object({
   name: z.string().min(5).max(30),
+  role: z.string().min(5).max(30),
   email: z.string().email().min(2).max(50),
+  telephone: z.string().min(5).max(30),
+
   password: z.string().min(8).max(30),
-  role: z.string(),
-});
+ });
 
 export default function SignupClient() {
   const formMethods = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "adem2",
-      email: "adem2@gmail.com",
       role: "Admin",
+      email: "adem2@gmail.com",
+      telephone: "21212121",
       password: "000000002",
     },
   });
@@ -39,20 +45,28 @@ export default function SignupClient() {
   const form = useForm({
     resolver: zodResolver(formSchema),
   });
+  const navigate = useNavigate();
+  const { setUser, setAuthenticated } = useUserContext();
+
   const {
     formState: { isSubmitting },
   } = form;
   const onSubmit = async (values) => {
-    console.log("Form values:", values);
-    console.log("Axios client:", axiosClient);
     try {
-      const response = await axiosClient.post("/api/register", values); // Adjust the endpoint to /register
-      console.log("Response:", response.data); // Assuming the response contains data
-      // Handle success response (if needed)
+      var data = await axiosClient.post('/api/register', values);
+
+      console.log("token data", data);
+      localStorage.setItem('token', data.token);
+      axiosClient.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+
+      setUser(data.user);
+      setAuthenticated(true);
+
+      navigate(HOME_ROUTE2);
     } catch (error) {
-      console.error("Error:", error);
-      // Handle error (if needed)
+      console.error('Login failed:', error);
     }
+
   };
 
   return (
@@ -67,9 +81,22 @@ export default function SignupClient() {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name</FormLabel>
+                <FormLabel>Full Name </FormLabel>
                 <FormControl>
                   <Input placeholder="Enter your name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+            <FormField
+            control={control}
+            name="role"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Role</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter your role" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -89,19 +116,16 @@ export default function SignupClient() {
               </FormItem>
             )}
           />
-          <FormField
+      <FormField
             control={control}
-            name="role"
+            name="telephone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Role</FormLabel>
+                <FormLabel>Phone Number</FormLabel>
                 <FormControl>
-                  <select {...field} placeholder="Select Role" variant="filled">
-                    <option value="Client">Client</option>
-                    <option value="Admin">Admin</option>
-                  </select>
+                  <Input placeholder="Enter your Phone Number" {...field} />
                 </FormControl>
-               
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -119,6 +143,26 @@ export default function SignupClient() {
                     {...field}
                   />
                 </FormControl>
+                
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+                <FormField
+            control={control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Confirme Password</FormLabel>
+                <FormControl>
+                  <Input
+                    type="password"
+                    placeholder="Enter your password"
+                    {...field}
+                  />
+                </FormControl>
+                
+                
                 <FormMessage />
               </FormItem>
             )}

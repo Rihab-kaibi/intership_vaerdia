@@ -7,7 +7,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import axiosClient from "../../api/axios";
 import { useNavigate } from "react-router-dom";
-import { HOME_ROUTE } from "../../router";
+import { HOME_ROUTE2 } from "../../router";
 import { Oval } from "react-loader-spinner";
 import { useUserContext } from "../../context/ClientContext";
 
@@ -28,7 +28,7 @@ export default function ClientLogin() {
   const navigate = useNavigate();
   const { setUser, setAuthenticated } = useUserContext();
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,12 +45,16 @@ export default function ClientLogin() {
 
   const onSubmit = async (values) => {
     try {
-      const { data } = await axiosClient.post('/api/login', values);
+      var data = await axiosClient.post('/api/login', values);
+
+      console.log("token data", data);
       localStorage.setItem('token', data.token);
       axiosClient.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+
       setUser(data.user);
       setAuthenticated(true);
-      navigate(HOME_ROUTE);
+
+      navigate(HOME_ROUTE2);
     } catch (error) {
       console.error('Login failed:', error);
     }

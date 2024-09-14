@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import axiosClient from "../../../api/axios";
 import { Button } from "@/components/ui/button";
 import Modal, { ModalHeader, ModalBody, ModalFooter } from "@/components/ui/Modal"; 
-import { FaFolder, FaCog } from "react-icons/fa"; 
+import { FaFolder } from "react-icons/fa"; 
 import { useUserContext } from "../../../context/ClientContext"; 
 
 const FolderManagementPage = () => {
-  const { user, authenticated, checkAuth } = useUserContext();
+  const { user, authenticated } = useUserContext();
   const [folders, setFolders] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [ setCategories] = useState([]);
   const [newFolderName, setNewFolderName] = useState("");
   const [newFolderCategory, setNewFolderCategory] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -87,25 +87,7 @@ const FolderManagementPage = () => {
               placeholder="Enter folder name"
             />
           </div>
-          <div className="mb-4 flex items-center">
-            <FaCog className="mr-2 text-gray-700" size={20} />
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="folderCategory">
-              Folder Category
-            </label>
-            <select
-              id="folderCategory"
-              value={newFolderCategory}
-              onChange={(e) => setNewFolderCategory(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            >
-              <option value="" disabled>Select a category</option>
-              {categories.map((category) => (
-                <option key={category.id} value={category.name}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
-          </div>
+        
         </ModalBody>
         <ModalFooter>
           <Button

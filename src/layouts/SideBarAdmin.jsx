@@ -2,15 +2,13 @@ import { cn } from "@/lib/utils";
 import { Button } from "../components/ui/button.jsx";
 import { Folder } from 'lucide-react';
 import { Settings  } from 'lucide-react';
-import { Bell } from 'lucide-react';
 import { BarChart } from 'lucide-react';
 import { Users } from "lucide-react";
 import { Home } from 'lucide-react';
+import { FaShieldAlt } from "react-icons/fa";
 
 import { useNavigate } from "react-router-dom";
-import { HOME_ADMIN_ROUTE,MANAGEMENT_ROUTE,ADMIN_NOTIFICATIONS_ROUTE,ANALYTICS_ROUTE,ADMIN_SETTINGS_ROUTE,CLIENTS_MANAGEMNET_ROUTE } from "../router/index.jsx";
-
-
+import { HOME_ADMIN_ROUTE,ANALYTICS_ROUTE,ADMIN_SETTINGS_ROUTE,CLIENTS_MANAGEMNET_ROUTE } from "../router/index.jsx";
 export function SideBarAdmin({ className }) {
   const navigate = useNavigate();
 
@@ -23,13 +21,16 @@ export function SideBarAdmin({ className }) {
           </h2>
           <div className="space-y-1">
             <Button variant="ghost" className="w-full justify-start" onClick={() => navigate(HOME_ADMIN_ROUTE)}>
-              <Home className="mr-2 h-4 w-4" /> Home
+              <Home className="mr-2 h-4 w-4" /> Dashboard
             </Button>
             <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/Module_Folders')}>
               <Folder className="mr-2 h-4 w-4" /> Folders Management
             </Button>
             <Button variant="ghost" className="w-full justify-start" onClick={() => navigate(CLIENTS_MANAGEMNET_ROUTE)}>
               <Users  className="mr-2 h-4 w-4" /> Clients Management
+            </Button>
+            <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/AccesManagement')}>
+              <FaShieldAlt  className="mr-2 h-4 w-4" /> Acces Management
             </Button>
            
             <Button variant="ghost" className="w-full justify-start" onClick={() => navigate(ANALYTICS_ROUTE)}>

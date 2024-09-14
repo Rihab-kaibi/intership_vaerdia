@@ -1,6 +1,11 @@
-import  { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
+  FiFolder,
   FiPlus,
+  FiEdit,
+  FiTrash2,
+  FiChevronRight,
+  FiChevronDown,
 } from "react-icons/fi"; // Importing icons from react-icons
 import axiosClient from "../../api/axios";
 import { Button } from "@/components/ui/button";
@@ -9,12 +14,14 @@ import AddCategoryModal from "./AddCategoryModal";
 import TestModal from "./TestModal";
 import TreeItem from "./TreeItem";
 import CategoriesTable from "./categories_table";
-import axios from "axios";
 
-const ModuleFolders = () => {
+const ClientModuleFolders = () => {
   const [folders, setFolders] = useState([]);
   const [newFolderName, setNewFolderName] = useState("");
+  const [loading, setLoading] = useState(true);
   const [expandedFolders, setExpandedFolders] = useState({});
+  const [addingCategory, setAddingCategory] = useState(null);
+
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
   const [isFolderModalOpen, setIsFolderModalOpen] = useState(false);
   const [isTestModalOpen, setIsTestModalOpen] = useState(false);
@@ -40,7 +47,7 @@ const ModuleFolders = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("/api/categories");
+        const response = await axiosClient.get("/api/categories");
         setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error.response);
@@ -159,7 +166,18 @@ const ModuleFolders = () => {
 
   return (
     <div className="bg-white shadow-md rounded-lg p-6">
-      <h1 className="text-2xl font-semibold mb-4">Folder Management</h1>
+       <h1 className="text-2xl font-semibold mb-4">Folder Management</h1>
+  <p className="mb-4">
+    In this section, you will manage your folders within the application. The folder management interface allows you to create new categories, rename existing ones, and organize your documents systematically. By creating categories, you can group related documents together, making it easier to find and access them when needed. Follow the steps below to get started:
+  </p>
+  <ul className="list-disc list-inside mb-4">
+    <li><strong>Create a New Category</strong>: Click on the "+" button and enter the desired name for your new category. This will help you organize your documents under specific groups.</li>
+    <li><strong>Rename a Category</strong>: To rename an existing category, select the category you want to modify, click on the "Rename" button, and enter the new name.</li>
+    <li><strong>Organize Documents</strong>: Drag and drop your documents into the appropriate categories to keep your files well-organized and easily accessible.</li>
+  </ul>
+  <p className="mb-4">
+    With these tools, you can maintain a structured and efficient document management system within the application.
+  </p>
       <ul className="space-y-4">
         {folders.map((folder) => (
           <li key={folder.id} className="border-b pb-2">
@@ -232,4 +250,4 @@ const ModuleFolders = () => {
   );
 };
 
-export default ModuleFolders;
+export default ClientModuleFolders;

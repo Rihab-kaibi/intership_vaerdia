@@ -7,7 +7,6 @@ import axiosClient from '../../api/axios';
 import ImageCanvas from './ImageCanvas';
 import Sidebar from './Sidebar';
 
-
 const AddCategoryModal = ({ isOpen, closeModal, currentFolderId, handleAddCategory }) => {
   const [categoryName, setCategoryName] = useState('');
   const [formData, setFormData] = useState({});
@@ -67,7 +66,6 @@ const AddCategoryModal = ({ isOpen, closeModal, currentFolderId, handleAddCatego
       }
     });
   };
-  
 
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -245,6 +243,7 @@ const AddCategoryModal = ({ isOpen, closeModal, currentFolderId, handleAddCatego
                     handleDeleteZone={handleDeleteZone}
                     imageScale={imageScale}
                     setImageScale={setImageScale}
+                    canvasRef={canvasRef}  // Pass canvasRef to Sidebar
                   />
                 </div>
                 <div className="mt-4 flex justify-end">
