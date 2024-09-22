@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+//modals code de create new folder
+import { useState, useEffect } from "react";
 import axiosClient from "../../../api/axios";
 import { Button } from "@/components/ui/button";
 import Modal, { ModalHeader, ModalBody, ModalFooter } from "@/components/ui/Modal"; 
@@ -8,14 +9,12 @@ import { useUserContext } from "../../../context/ClientContext";
 const FolderManagementPage = () => {
   const { user, authenticated } = useUserContext();
   const [folders, setFolders] = useState([]);
-  const [ setCategories] = useState([]);
   const [newFolderName, setNewFolderName] = useState("");
   const [newFolderCategory, setNewFolderCategory] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetchFolders();
-    fetchCategories();
   }, []);
 
   const fetchFolders = async () => {
@@ -27,14 +26,7 @@ const FolderManagementPage = () => {
     }
   };
 
-  const fetchCategories = async () => {
-    try {
-      const response = await axiosClient.get("/api/categories");
-      setCategories(response.data);
-    } catch (error) {
-      console.error("Error fetching categories:", error);
-    }
-  };
+ 
 
   const handleAddFolder = async () => {
     try {

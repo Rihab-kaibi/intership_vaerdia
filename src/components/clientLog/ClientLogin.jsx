@@ -20,8 +20,8 @@ export default function ClientLogin() {
   const formMethods = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "tahayassine@example.com",
-      password: "12341234",
+      email: "ademtaha2@gmail.com",
+      password: "00000000",
     }
   });
   const { handleSubmit, control, formState: { isSubmitting } } = formMethods;

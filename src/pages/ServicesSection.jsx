@@ -1,4 +1,3 @@
-import React from 'react';
 import { FiFileText, FiSearch, FiCalendar, FiCheckSquare, FiUserCheck, FiClipboard } from 'react-icons/fi';
 
 const ServicesSection = () => {

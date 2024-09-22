@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiSearch, FiChevronDown } from 'react-icons/fi';
 
@@ -15,7 +14,7 @@ const HeaderSection = () => {
               <FiChevronDown />
             </button>
             <ul className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
-              <li className="px-4 py-2 hover:bg-gray-100"><Link to="/solution1">Solution 1</Link></li>
+              <li className="px-4 py-2 hover:bg-gray-100"><Link to="/solution1">Solution 1 </Link></li>
               <li className="px-4 py-2 hover:bg-gray-100"><Link to="/solution2">Solution 2</Link></li>
             </ul>
           </li>

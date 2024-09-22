@@ -1,5 +1,4 @@
-import React from "react";
-
+ 
 const Archives = () => {
   return (
     <div className="container mx-auto p-6">

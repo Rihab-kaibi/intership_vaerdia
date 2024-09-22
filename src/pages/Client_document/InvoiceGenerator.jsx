@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 
 const InvoiceGenerator = ({ billingDetails }) => {
   const [invoiceDetails, setInvoiceDetails] = useState({

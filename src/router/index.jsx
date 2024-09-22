@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Login from "../pages/Login.jsx";
 import AdminLogin from "../components/AdminLogin/AdminLogin.jsx";
-import Signup from "../pages/Signup.jsx";
+import Signup from "../components/Signup/SignupClient.jsx" 
 import NotFound from "../pages/NotFound.jsx";
 import Layout from "../layouts/Layout.jsx";
 import GuestLayout from "../layouts/GuestLayout.jsx";
@@ -25,8 +25,6 @@ import ClientModuleFolders from '../pages/Admin_pages/Client_Module_Folders.jsx'
 import FolderManagementPage from "../pages/Client_document/FolderManagementClient/FolderManagement.jsx";
 import Parsers from '../pages/Client_document/Parsers.jsx';
 import Templates from '../pages/Client_document/Templates.jsx';
-import Subscription from '../pages/Client_document/Subscription.jsx';
-import AccessManagement from '../pages/Admin_pages/AccessManagement.jsx';
 export const CLIENTS_MANAGEMNET_ROUTE = '/Admin/ClientManagement';
 export const LOGIN_ROUTE = '/Client/login';
 export const LOGIN_ADMIN_ROUTE = '/Admin/Login';
@@ -44,7 +42,7 @@ export const HOME_ADMIN_ROUTE = '/Admin/dashboard'
 export const PROFILE_ROUTE = '/ProfilePage';
 export const ADMIN_NOTIFICATIONS_ROUTE='/AdminNotifications';
 export const ADMIN_PROFILE_ROUTE='/AdminProfilePage';
-
+export const TEMPLATE_ROUTES='/Templates'
 
 const router = createBrowserRouter([
 
@@ -88,7 +86,7 @@ const router = createBrowserRouter([
             element: <ClientDashboard/>
           },
           {
-            path: '/Templates',
+            path: TEMPLATE_ROUTES,
             element: <Templates/>
           },
           {
@@ -116,10 +114,6 @@ const router = createBrowserRouter([
             element: <FileManagement/>
           },
           {
-            path:'/Subscription',
-            element: <Subscription/>
-          },
-          {
             path:BILLING_ROUTE,
             element: <Billing/>
           },
@@ -136,17 +130,11 @@ const router = createBrowserRouter([
             element: <ClientModuleFolders/>
             
           }, 
-         
         ]
       },
       {
         element: <AdminLayout/>,
         children: [
-          {
-            path: '/AccesManagement',
-            element: <AccessManagement/>
-            
-          }, 
           {
             path: HOME_ADMIN_ROUTE,
             element: <AdminDashboard/>

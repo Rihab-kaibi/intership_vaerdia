@@ -12,9 +12,6 @@ import {
 } from "../ui/form";
 import { Input } from "@/components/ui/input";
 import { Loader } from "lucide-react";
-
-
-
 import axiosClient from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/ClientContext";
@@ -37,7 +34,7 @@ export default function SignupClient() {
       role: "Admin",
       email: "adem2@gmail.com",
       telephone: "21212121",
-      password: "000000002",
+      password: "00000000",
     },
   });
 

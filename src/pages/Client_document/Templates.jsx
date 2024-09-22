@@ -1,7 +1,8 @@
 // src/components/Templates.jsx
-import React from 'react';
+import { useNavigate } from "react-router-dom";
 
 const Templates = () => {
+  const navigate = useNavigate();
   const services = [
     { icon: "fas fa-file-alt text-gray-800", label: "Extract Data from PDF", available: true },
     { icon: "fas fa-file-code text-gray-500", label: "Convert PDF to XML", available: false },
@@ -22,7 +23,7 @@ const Templates = () => {
       <div className="flex">
         <div className="w-1/4">
           <h2 className="text-lg font-bold mb-4">Browse Services</h2>
-          <button className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-blue-700 mb-4">
+          <button className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-blue-700 mb-4" onClick={() => navigate('/Clients_Module_Folders')}>
             Start with our PDF parser
           </button>
           <h3 className="text-md font-bold mb-2">Services We Provide</h3>

@@ -1,8 +1,10 @@
 // src/components/Parsers.jsx
-import React from 'react';
+
 import exampleImage from '../../assets/image.png'; // Adjust the path as necessary
+import { useNavigate } from 'react-router-dom';
 
 const Parsers = () => {
+  const navigate = useNavigate();
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">Getting Started with Documents-IA-Scanner</h1>
@@ -17,10 +19,10 @@ const Parsers = () => {
               <li>A Scanner contains rules used to extract the data you want.</li>
               <li>Rules provide the structure to your data so it is more useful to you.</li>
             </ul>
-            <button className=" m-2 bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700">
-              Create Document Scanner
+            <button className=" m-2 bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700"onClick={() => navigate('/Clients_Module_Folders')}>
+              Create Document Parser
             </button>
-            <button className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700">
+            <button className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700"onClick={() => navigate('/Client/folders')}>
              Go to your Docs
             </button>
           </div>

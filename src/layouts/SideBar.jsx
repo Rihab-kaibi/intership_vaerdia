@@ -1,9 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Button } from "../components/ui/button.jsx";
-import { FolderOpen } from 'lucide-react';
-import { Settings  } from 'lucide-react';
 import { Bell } from 'lucide-react';
-import { FileBox  } from 'lucide-react';
 import { HelpCircle } from 'lucide-react';
 import { Info } from 'lucide-react';
 import { MessageCircle } from 'lucide-react';
@@ -14,7 +11,7 @@ import { HOME_ROUTE,HOME_ROUTE2 } from "../router/index.jsx";
 import { VscFiles } from "react-icons/vsc";
 import { GrScan } from "react-icons/gr";
 import { HiOutlineTemplate } from "react-icons/hi";
-import { FaRegCreditCard } from "react-icons/fa6";
+
 
 export function SideBar({ className }) {
   const navigate = useNavigate();
@@ -39,17 +36,11 @@ export function SideBar({ className }) {
             <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/Clients_Module_Folders')}>
               <GrScan  className="mr-2 h-4 w-4" /> Create Parsers
             </Button>
-            <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/Subscription')}>
-              <FaRegCreditCard  className="mr-2 h-4 w-4" />  Subscription
-            </Button>
             <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/Billing')}>
               <Euro  className="mr-2 h-4 w-4" />  Billing
             </Button>
             <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/Notifications')}>
               <Bell className="mr-2 h-4 w-4" /> Notifications
-            </Button>
-            <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/Settings')}>
-              <Settings  className="mr-2 h-4 w-4" /> Settings
             </Button>
           </div>
         </div>

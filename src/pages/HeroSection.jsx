@@ -1,6 +1,4 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'react-feather';
 import backgroundImage from '../assets/background_image.webp'; // Make sure to replace this with the correct path to your image
 
 const HeroSection = () => {
@@ -12,9 +10,6 @@ const HeroSection = () => {
       <div className="bg-blue-600 bg-opacity-75 p-8 rounded-lg">
         <h1 className="text-4xl font-bold mb-4">Document Management and Data Parsing</h1>
         <h2 className="text-2xl font-bold mb-4">Embrace Digital Transformation</h2>
-        <p className="text-lg mb-8">
-          Our final year project is an AI-powered document management system. The goal is to streamline document management by automating classification, information extraction, and advanced search capabilities.
-        </p>
         <p className="text-lg mb-8">
           The digital revolution is underway: whether in the office, on the go, or working remotely.
           Archive, share, secure, validate, and sign your key documents with our solution.

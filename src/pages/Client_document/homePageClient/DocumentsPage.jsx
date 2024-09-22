@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axiosClient from "../../../api/axios";
 import { FaRegTrashAlt, FaFileAlt, FaFolder } from "react-icons/fa";
-import { IoMdClose } from "react-icons/io";
 import ConfirmationDialog from "../../Admin_pages/ClientManagementFolder/ConfirmationDialog";
 import { MdOutlineDocumentScanner } from "react-icons/md";
-import { IoMdQrScanner } from "react-icons/io";
+
 import ImageModal from "./ImageModal";  // Import the ImageModal component
 import ControlSidebar from "./ControlSidebar";  // Import the ControlSidebar component
 
@@ -144,9 +143,6 @@ const DocumentsPage = () => {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Document ID
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Document Name
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -167,7 +163,6 @@ const DocumentsPage = () => {
             {currentItems.map((pdf) => (
               <React.Fragment key={pdf.id}>
                 <tr>
-                  <td className="px-6 py-4 whitespace-nowrap">{pdf.id}</td>
                   <td className="px-6 py-4 whitespace-nowrap flex items-center">
                     <FaFileAlt className="mr-2 text-gray-700" />
                     {pdf.filename}
@@ -193,12 +188,7 @@ const DocumentsPage = () => {
                     >
                       <MdOutlineDocumentScanner />
                     </button>
-                    <button
-                      onClick={() => handleScanClick(pdf.id)}
-                      className="p-2 bg-gray-800 text-white rounded-full shadow-md hover:bg-green-700 focus:ring-2 ml-2"
-                    >
-                     <IoMdQrScanner />
-                    </button>
+                  
                   </td>
                 </tr>
                 {expandedPdf === pdf.id && (

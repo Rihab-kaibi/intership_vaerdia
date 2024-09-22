@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import Client_Folders from "../../pages/Client_document/homePageClient/Client_Folders";
 import FileManagement from "../../pages/Client_document/FileManagement";
 const ClientDashboard = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [ setSelectedFile] = useState(null);
 
   const handleFileClick = (file) => {
     setSelectedFile(file);
@@ -15,9 +15,6 @@ const ClientDashboard = () => {
         {/* Dashboard Content */}
         <div className="p-2">
         <FileManagement/>
-         
-        
-
           {/* Client Folders Widget */}
           <div className="mt-8">
             <div className="bg-white p-8 shadow rounded-lg">

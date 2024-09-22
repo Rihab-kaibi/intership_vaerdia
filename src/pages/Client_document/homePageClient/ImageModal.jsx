@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect, Fragment } from "react";
+//modal verfication de la page de document
+import  { useState, useRef, useEffect, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { IoMdClose } from "react-icons/io";
 import Tesseract from "tesseract.js";
 import leven from "leven";
 import axiosClient from "../../../api/axios";

@@ -29,10 +29,6 @@ export function SideBarAdmin({ className }) {
             <Button variant="ghost" className="w-full justify-start" onClick={() => navigate(CLIENTS_MANAGEMNET_ROUTE)}>
               <Users  className="mr-2 h-4 w-4" /> Clients Management
             </Button>
-            <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/AccesManagement')}>
-              <FaShieldAlt  className="mr-2 h-4 w-4" /> Acces Management
-            </Button>
-           
             <Button variant="ghost" className="w-full justify-start" onClick={() => navigate(ANALYTICS_ROUTE)}>
               <BarChart className="mr-2 h-4 w-4" /> Analytics
             </Button>
